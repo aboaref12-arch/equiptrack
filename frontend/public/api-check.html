@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>API Connectivity Check</title>
+  <style>
+    body { font-family: system-ui, Arial; padding: 24px; }
+    .ok { color: green; font-weight: 700; }
+    .err { color: #b00020; font-weight: 700; }
+    pre { background:#f6f8fa; padding:12px; border-radius:8px; overflow:auto; }
+  </style>
+</head>
+<body>
+  <h1>API Connectivity Check</h1>
+  <p>Backend: <code>https://equiptrack.onrender.com/api/</code></p>
+  <div id="status">Checking...</div>
+  <pre id="out"></pre>
+
+  <script>
+    const API = "https://equiptrack.onrender.com/api/";
+    fetch(API, { credentials: "omit" })
+      .then(async (res) => {
+        const text = await res.text();
+        document.getElementById("status").innerHTML =
+          res.ok ? '<span class="ok">Connected ✅</span>' :
+                   '<span class="err">Received response, but not OK ('+res.status+')</span>';
+        document.getElementById("out").textContent = text.slice(0, 2000);
+      })
+      .catch((err) => {
+        document.getElementById("status").innerHTML =
+          '<span class="err">Failed ❌</span>';
+        document.getElementById("out").textContent = String(err);
+      });
+  </script>
+</body>
+</html>
