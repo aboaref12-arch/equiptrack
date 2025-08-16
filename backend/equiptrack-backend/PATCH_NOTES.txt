@@ -1,0 +1,10 @@
+
+Optional backend changes to enable timestamps on all models and an /api/activity/ endpoint.
+Update:
+  - core/models.py (add TimeStampedModel and inherit)
+  - core/serializers.py (expose created_at/updated_at)
+  - core/views.py (add ActivityViewSet)
+  - equiptrack_api/urls.py (router.register('activity', ...))
+Then run on Render:
+  python equiptrack_api/manage.py makemigrations
+  python equiptrack_api/manage.py migrate
