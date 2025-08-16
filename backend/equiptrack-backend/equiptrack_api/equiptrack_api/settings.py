@@ -20,6 +20,8 @@ INSTALLED_APPS = [
     "django_filters",
     "core",
 ]
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
